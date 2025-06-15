@@ -59,6 +59,10 @@ for x in range(max_steps):
     err = target_pos - ee_pos
     err[1] = 0 # moving only in Oxz
 
+    if (np.linalg.norm(err) < 0.01 and np.linalg.norm(qdot) < 0.05):
+        break
+
+
     J_lin, _ = p.calculateJacobian(
         bodyUniqueId = pend,
         linkIndex = link_eef_index,
